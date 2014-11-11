@@ -35,5 +35,9 @@ $( '#headline' ).each( function () {
       elem.val( new_value );
     }
   } );
+  elem.bind( 'select', function ( event ) {
+    var selectedText = window.getSelection().toString();
+    // if selected text matches patterns, do popup
+  } );
 } );
 </script>
