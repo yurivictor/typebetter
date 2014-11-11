@@ -1,5 +1,27 @@
+<style>
+#headline {
+  padding: 10px;
+  width: 450px;
+}
+#popup-quote {
+  background-color: efefef;
+  display: none;
+  padding: 10px;
+}
+#popup-quote div:hover {
+  background: #fff200;
+}
+</style>
 <input id="headline" name="headline" type="text">
-
+<div id="popup-quote">
+  <div>"</div>
+  <div>'</div>
+  <div>&lsquo;</div>
+  <div>&rsquo;</div>
+  <div>&ldquo;</div>
+  <div>&prime;</div>
+  <div>&Prime;</div>
+</div>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>
 $( '#headline' ).each( function () {
@@ -38,6 +60,7 @@ $( '#headline' ).each( function () {
   elem.bind( 'select', function ( event ) {
     var selectedText = window.getSelection().toString();
     // if selected text matches patterns, do popup
+    $( '#popup-quote' ).show();
   } );
 } );
 </script>
