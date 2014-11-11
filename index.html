@@ -30,6 +30,7 @@ $( '#headline' ).each( function () {
         .replace(/(\B|^)\u2018(?=([^\u2019]*\u2019\b)*([^\u2019\u2018]*\W[\u2019\u2018]\b|[^\u2019\u2018]*$))/ig, '$1\u2019') // backwards apostrophe
         .replace(/'''/g, '\u2034')                                                   // triple prime
         .replace(/("|'')/g, '\u2033')                                                // double prime
+        .replace(/(\W|^)\u2019(\d+)/g,'$1\u2032$2')
         .replace(/'/g, '\u2032');                                                    // prime
       elem.val( new_value );
     }
