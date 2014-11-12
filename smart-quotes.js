@@ -57,7 +57,6 @@ VOX.Quotes = ( function ( $ ) {
   var addQuote = function ( event ) {
     removeQuoteSelector();
     var newQuote = $( this ).html();
-
     headline.val( headline.val().substring( 0, headlineStart ) + newQuote + headline.val().substring( headlineEnd, headlineLength ) );
   };
 
