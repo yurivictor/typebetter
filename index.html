@@ -89,8 +89,10 @@ VOX.Quotes = ( function ( $ ) {
   var addQuote = function ( event ) {
     removeQuoteSelector();
     var newQuote = $( this ).html();
+    range = selectedText.getRangeAt( 0 );
     range.deleteContents();
     range.insertNode( document.createTextNode( newQuote ) );
+    range.text = newQuote;
   };
 
   var addEvents = function () {
