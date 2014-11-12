@@ -98,7 +98,7 @@ VOX.Quotes = ( function ( $ ) {
   };
 
   var addEvents = function () {
-    headline.bind( 'propertychange change click input paste', handleQuotes );
+    headline.bind( 'propertychange change input paste', handleQuotes );
     headline.bind( 'select', addQuoteSelector );
     $( '#popup-quote div' ).on( 'click', addQuote );
   };
