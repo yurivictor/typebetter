@@ -42,6 +42,8 @@ var VOX = VOX || {};
 VOX.Quotes = ( function ( $ ) {
 
   var headline = $( '#headline' );
+  var selectedText;
+  var range;
 
   var handleQuotes = function ( event ) {
     var headline = $( this );
@@ -68,18 +70,27 @@ VOX.Quotes = ( function ( $ ) {
 
   var addQuoteSelector = function ( event ) {
     // Get selected text
-    var selectedText = window.getSelection().toString();
-    var length = selectedText.length;
+    selectedText = window.getSelection();
+    range = selectedText.getRangeAt( 0 );
+    selectedTextString = selectedText.toString();
+    var length = selectedTextString.length;
     // if selected text is just one character
+    // for now
+    // build in better popup reasons in the future
     if ( length == 1 ) {
       $( '#popup-quote' ).show();
     }
   };
 
+  var removeQuoteSelector = function ( event ) {
+    $( '#popup-quote' ).hide();
+  };
+
   var addQuote = function ( event ) {
-    // Reup selectedtext in case things have changed
-    var selectedText = window.getSelection().toString();
+    removeQuoteSelector();
     var newQuote = $( this ).html();
+    range.deleteContents();
+    range.insertNode( document.createTextNode( newQuote ) );
   };
 
   var addEvents = function () {
