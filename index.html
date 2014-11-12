@@ -67,7 +67,8 @@ VOX.Quotes = ( function ( $ ) {
       .replace(/("|'')/g, '\u2033')                                                // double prime
       .replace(/("|'')/g, '\u2033')                                                // double prime
       // .replace(/(\W|^)\u2019(\d+)/g,'$1\u2032$2')                                  // prime
-      .replace(/'/g, '\u2032');                                                    // prime
+      .replace(/'/g, '\u2032')                                                 // prime
+      .replace(/\u2013\u2013|--/g, '\u2014'); // mdash
     headline.val( new_value );
   };
 
