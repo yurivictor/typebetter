@@ -19,6 +19,7 @@
   background: #fff200;
 }
 #popup-quote div {
+  cursor: pointer;
   display: inline;
   padding: 0 10px;
 }
@@ -75,9 +76,16 @@ VOX.Quotes = ( function ( $ ) {
     }
   };
 
+  var addQuote = function ( event ) {
+    // Reup selectedtext in case things have changed
+    var selectedText = window.getSelection().toString();
+    var newQuote = $( this ).html();
+  };
+
   var addEvents = function () {
-    headline.bind( 'propertychange change click keyup input paste', handleQuotes );
+    headline.bind( 'propertychange change click input paste', handleQuotes );
     headline.bind( 'select', addQuoteSelector );
+    $( '#popup-quote div' ).on( 'click', addQuote );
   };
 
   var init = function () {
