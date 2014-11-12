@@ -4,9 +4,9 @@ VOX.Quotes = ( function ( $ ) {
 
   var headline = $( '#headline' );
   var selectedText,
-      selectionStart,
-      selectionLength,
-      selectionEnd,
+      headlineStart,
+      headlineLength,
+      headlineEnd,
       range;
 
   var handleQuotes = function ( event ) {
@@ -38,8 +38,9 @@ VOX.Quotes = ( function ( $ ) {
     selectedText = window.getSelection();
     range = selectedText.getRangeAt( 0 );
     selectedTextString = selectedText.toString();
-    selectionStart = headline[0].selectionStart;
-    selectionEnd = headline[0].selectionEnd;
+    headlineStart = headline[0].selectionStart;
+    headlineEnd = headline[0].selectionEnd;
+    headlineLength = headline[0].length;
     selectionLength = selectedTextString.length;
     // if selected text is just one character
     // for now
@@ -56,7 +57,8 @@ VOX.Quotes = ( function ( $ ) {
   var addQuote = function ( event ) {
     removeQuoteSelector();
     var newQuote = $( this ).html();
-    headline.val( headline.val().substring( 0, selectionStart ) + newQuote + headline.val().substring( selectionEnd, selectionLength ) );
+
+    headline.val( headline.val().substring( 0, headlineStart ) + newQuote + headline.val().substring( headlineEnd, headlineLength ) );
   };
 
   var addEvents = function () {
