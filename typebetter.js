@@ -28,9 +28,7 @@ TypeBetter = {
       // remaining " at end of word
       .replace(/([^0-9])"/g,'$1\u201d')
       // beginning '
-      .replace(/(\W|^)'(\S)/g, '$1\u2018$2')
-      .replace(/(\W|^)\u2032(\S)/g,'$1\u2018$2')
-      .replace(/(\W|^)\u2019(\S)/g,'$1\u2018$2')
+      .replace(/(\W|^)'|\u2019(?!\u201d|")(\S)/g, '$1\u2018$2')
       // conjunction's possession
       .replace(/([a-z])'([a-z])/ig, '$1\u2019$2')
       // ending '
@@ -46,9 +44,9 @@ TypeBetter = {
       // prime
       .replace(/'/g, '\u2032')
       // hack for prime end quote
-      .replace(/(\u2032)("|”|“)/g, '′”')
+      .replace(/(\u2032|′)("|”|“)/g, '′”')
       // hack for apostrophe end quote
-      .replace(/(\u2019)("|”|“)/g, '’”')
+      .replace(/(\u2019|\u2018)("|”|“)/g, '’”')
       // ellipses
       .replace(/(\.\.\.)/, '\u2026')
       // mdash
