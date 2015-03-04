@@ -16,6 +16,10 @@ TypeBetter = {
   },
 
   handleQuotes: function() {
+    // get current cursor position
+    var start = this.selectionStart,
+        end   = this.selectionEnd;
+    // Replaces input field type with better type
     // reworked from smartquotes.js
     // https://github.com/kellym/smartquotesjs/blob/master/src/smartquotes.js
     var new_value = TypeBetter.input.val()
@@ -49,6 +53,8 @@ TypeBetter = {
     .replace(/\u2013\u2013|--/g, ' \u2014 ');
     // Replace headline
     TypeBetter.input.val( new_value );
+    // Restore cursor position
+    this.setSelectionRange(start, end);
   }
 
 };
