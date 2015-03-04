@@ -1,0 +1,19 @@
+/* vox model */
+* {
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  padding: 100px;
+}
+/* input specific */
+#entry-title {
+  font-size: 3em;
+  outline: 0;
+  padding: 10px;
+  width: 100%;
+}
+#entry-title:focus {
+  border: 1px solid #fff200;
+}
