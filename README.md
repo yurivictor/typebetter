@@ -1,5 +1,5 @@
 # Type better
-Fixes type live in input fields.
+Fixes typography while a user types. Making dumb quotes smart again.
 
 ![Gif showing type being corrected live](typebetter.gif)
 
