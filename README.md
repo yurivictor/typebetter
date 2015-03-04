@@ -19,7 +19,7 @@ Converts ' to ’
 Converts feet, inches and latitude, longitude to ′ and ″
 
 ### Abbrevieted years
-Converts abbreviated years from ' to ‘
+Converts abbreviated years from ' to ’
 
 ### Ellipses
 Converts ... to …
