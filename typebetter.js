@@ -24,9 +24,7 @@ TypeBetter = {
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
       // ending "
-      .replace(/(\u201c|"[^"]*)"([^"]*$|[^\u201c"]*\u201c)/g, '$1\u201d$2')
-      // remaining " at end of word
-      .replace(/([^0-9])"/g,'$1\u201d')
+      .replace(/(\u201c|"[^"]*)([^"]*)(\u201c|"[^"]*)/g, '$1$2\u201d')
       // beginning '
       .replace(/(\W|^)'|\u2019(?!\u201d|")(\S)/g, '$1\u2018$2')
       // conjunction's possession
@@ -40,7 +38,7 @@ TypeBetter = {
       // triple prime
       .replace(/'''/g, '\u2034')
       // double prime
-      .replace(/("|'')/g, '\u2033')
+      // .replace(/("|'')/g, '\u2033')
       // prime
       .replace(/'/g, '\u2032')
       // hack for prime end quote
