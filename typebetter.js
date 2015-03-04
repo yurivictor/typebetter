@@ -50,7 +50,9 @@ TypeBetter = {
       // ellipses
       .replace(/(\.\.\.)/, '\u2026')
       // mdash
-      .replace(/\u2013\u2013|--/g, ' \u2014 ');
+      .replace(/\u2013\u2013|--/g, ' \u2014 ')
+      // rock 'n' roll
+      .replace(/(\u2018|')(n)(\u2019|')/gi, '’n’');
     // Replace headline
     TypeBetter.input.val( new_value );
     // Restore cursor position
