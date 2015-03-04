@@ -16,10 +16,10 @@ Converts "" to “” and '' to ‘’
 Converts ' to ’
 
 ### Primes and double primes
-Converts feet and inch representations to ′ and ″
+Converts feet, inches and latitude, longitude to ′ and ″
 
 ### Abbrevieted years
-Converts abbreviated years to ‘93
+Converts abbreviated years from ' to ‘
 
 ### Em dash
 Converts -- to —
