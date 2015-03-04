@@ -13,10 +13,11 @@ TypeBetter = {
 
   bindUIActions: function() {
     if (this.input.addEventListener) {
-      this.input.addEventListener('propertychange', this.handleQuotes, false);
-      this.input.addEventListener('change', this.handleQuotes, false);
-      this.input.addEventListener('input', this.handleQuotes, false);
-      this.input.addEventListener('paste', this.handleQuotes, false);
+      var actions = ['propertychange', 'change', 'input', 'paste'];
+
+      for (var i = 0, j = actions.length; i < j; i++) {
+        this.input.addEventListener(actions[i], this.handleQuotes, false);
+      }
     }
   },
 

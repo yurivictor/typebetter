@@ -28,7 +28,7 @@ Converts ... to …
 Converts -- to —
 
 ## Contributors
-[Yuri Victor](https://github.com/yurivictor/), [Jason Santa Maria](https://github.com/jasonsantamaria), [Scott Kellum](https://github.com/scottkellum), and [Jeremy Keith](https://github.com/adactio)
+[Yuri Victor](https://github.com/yurivictor/), [Jason Santa Maria](https://github.com/jasonsantamaria), [Scott Kellum](https://github.com/scottkellum), [Jeremy Keith](https://github.com/adactio), [Jason Garber](https://github.com/jgarber623)
 
 
 ## Contributing
