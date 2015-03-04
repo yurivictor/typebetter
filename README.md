@@ -21,6 +21,9 @@ Converts feet, inches and latitude, longitude to ′ and ″
 ### Abbrevieted years
 Converts abbreviated years from ' to ‘
 
+### Ellipses
+Converts ... to … 
+
 ### Em dash
 Converts -- to —
 
