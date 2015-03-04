@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en-us">
 <head>
@@ -8,6 +9,11 @@
 <body>
   <input id="entry-title" name="headline" type="text">
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="smart-quotes.js"></script>
+  <script src="../smart-quotes.js"></script>
+  <script>
+  (function() {
+    TypeBetter.init( $('#entry-title') );
+  })();
+  </script>
 </body>
 </html>

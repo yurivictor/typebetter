@@ -1,22 +1,24 @@
-var Chorus = Chorus || {};
+var TypeBetter = TypeBetter || {};
 
-Chorus.SmartQuotes = {
+TypeBetter = {
 
-  $headline: $('#entry-title'),
+  input: '',
 
-  init: function() {
+  init: function( input ) {
+    // Set input field
+    this.input = input;
     // Add events
     this.bindUIActions();
   },
 
   bindUIActions: function() {
-    this.$headline.bind('propertychange change input paste', this.handleQuotes);
+    this.input.bind('propertychange change input paste', this.handleQuotes);
   },
 
   handleQuotes: function() {
     // reworked from smartquotes.js
     // https://github.com/kellym/smartquotesjs/blob/master/src/smartquotes.js
-    var new_value = Chorus.SmartQuotes.$headline.val()
+    var new_value = TypeBetter.input.val()
     // beginning "
     .replace(/(\W|^)"/g, '$1\u201c')
     // ending "
@@ -46,12 +48,7 @@ Chorus.SmartQuotes = {
     // mdash
     .replace(/\u2013\u2013|--/g, ' \u2014 ');
     // Replace headline
-    Chorus.SmartQuotes.$headline.val( new_value );
+    TypeBetter.input.val( new_value );
   }
 
 };
-
-
-(function() {
-  Chorus.SmartQuotes.init();
-})();

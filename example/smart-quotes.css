@@ -4,6 +4,9 @@
   box-sizing: border-box;
 }
 
+body {
+  padding: 100px;
+}
 /* input specific */
 #entry-title {
   font-size: 3em;
