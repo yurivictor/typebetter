@@ -3,7 +3,7 @@ Fixes type live in input fields.
 
 ![Gif showing type being corrected live](typebetter.gif)
 
-A work in progress. Still messes up as much as it succeeds.
+A work in progress. Succeeds more than it fails.
 
 See it live: http://yurivictor.com/smartquotes/
 
@@ -22,7 +22,7 @@ Converts feet, inches and latitude, longitude to ′ and ″
 Converts abbreviated years from ' to ‘
 
 ### Ellipses
-Converts ... to … 
+Converts ... to …
 
 ### Em dash
 Converts -- to —
