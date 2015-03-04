@@ -5,26 +5,12 @@
 }
 
 /* input specific */
-#headline {
+#entry-title {
   font-size: 3em;
   outline: 0;
   padding: 10px;
   width: 100%;
 }
-#headline:focus {
+#entry-title:focus {
   border: 1px solid #fff200;
-}
-#popup-quote {
-  background-color: #efefef;
-  display: none;
-  font-size: 3em;
-  padding: 10px;
-}
-#popup-quote div:hover {
-  background: #fff200;
-}
-#popup-quote div {
-  cursor: pointer;
-  display: inline;
-  padding: 0 10px;
 }
