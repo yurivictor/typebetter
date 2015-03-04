@@ -1,7 +1,7 @@
 # Type better
 Fixes type live in input fields.
 
-![Gif showing type being corrected live](smartquotes.gif)
+![Gif showing type being corrected live](typebetter.gif)
 
 A work in progress. Still messes up as much as it succeeds.
 
