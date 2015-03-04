@@ -1,0 +1,19 @@
+{
+  "name": "typebetter",
+  "version": "0.0.1",
+  "description": "Fixes typography while a user types. Making dumb quotes smart again.",
+  "keywords": [
+    "typography"
+  ],
+  "homepage": "https://github.com/yurivictor/typebetter",
+  "bugs": {
+    "url": "https://github.com/yurivictor/typebetter/issues"
+  },
+  "license": "BSD",
+  "author": "Yuri Victor (http://yurivictor.com/)",
+  "main": "dist/typebetter.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yurivictor/typebetter.git"
+  }
+}
