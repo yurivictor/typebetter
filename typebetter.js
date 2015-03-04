@@ -31,7 +31,9 @@ TypeBetter = {
       // ending "
       .replace(/(\u201c|"[^"]*)([^"]*)(\u201c|"[^"]*)/g, '$1$2\u201d')
       // beginning '
-      .replace(/(\W|^)'|\u2019(?!\u201d|")(\S)/g, '$1\u2018$2')
+      .replace(/(\W|^)'(\S)/g, '$1\u2018$2')
+      .replace(/(\W|^)\u2032(\S)/g,'$1\u2018$2')
+      .replace(/(\W|^)\u2019(\S)/g,'$1\u2018$2')
       // conjunction's possession
       .replace(/([a-z])'([a-z])/ig, '$1\u2019$2')
       // ending '
@@ -43,7 +45,7 @@ TypeBetter = {
       // triple prime
       .replace(/'''/g, '\u2034')
       // double prime
-      // .replace(/("|'')/g, '\u2033')
+      .replace(/("|'')/g, '\u2033')
       // prime
       .replace(/'/g, '\u2032')
       // hack for prime end quote
@@ -55,7 +57,7 @@ TypeBetter = {
       // mdash
       .replace(/\u2013\u2013|--/g, ' \u2014 ')
       // rock 'n' roll
-      .replace(/(\u2018|')(n)(\u2019|')/gi, '’n’');
+      .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
     // Replace headline
     TypeBetter.input.value = new_value;
     // Restore cursor position
