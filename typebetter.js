@@ -12,7 +12,12 @@ TypeBetter = {
   },
 
   bindUIActions: function() {
-    this.input.bind('propertychange change input paste', this.handleQuotes);
+    if (this.input.addEventListener) {
+      this.input.addEventListener('propertychange', this.handleQuotes, false);
+      this.input.addEventListener('change', this.handleQuotes, false);
+      this.input.addEventListener('input', this.handleQuotes, false);
+      this.input.addEventListener('paste', this.handleQuotes, false);
+    }
   },
 
   handleQuotes: function() {
@@ -20,7 +25,7 @@ TypeBetter = {
     var start = this.selectionStart,
         end   = this.selectionEnd;
     // Replaces input field type with better type
-    var new_value = TypeBetter.input.val()
+    var new_value = TypeBetter.input.value
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
       // ending "
@@ -54,7 +59,7 @@ TypeBetter = {
       // rock 'n' roll
       .replace(/(\u2018|')(n)(\u2019|')/gi, '’n’');
     // Replace headline
-    TypeBetter.input.val( new_value );
+    TypeBetter.input.value = new_value;
     // Restore cursor position
     this.setSelectionRange(start, end);
   }
