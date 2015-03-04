@@ -45,8 +45,10 @@ TypeBetter = {
       .replace(/("|'')/g, '\u2033')
       // prime
       .replace(/'/g, '\u2032')
-      // hack for '"
-      .replace(/(’|')("|”|“)/g, '’”')
+      // hack for prime end quote
+      .replace(/(\u2032)("|”|“)/g, '′”')
+      // hack for apostrophe end quote
+      .replace(/(\u2019)("|”|“)/g, '’”')
       // mdash
       .replace(/\u2013\u2013|--/g, ' \u2014 ');
     // Replace headline
