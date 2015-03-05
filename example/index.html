@@ -1,18 +1,43 @@
-
 <!doctype html>
 <html lang="en-us">
 <head>
   <meta charset="utf-8">
+
   <title>type better example</title>
-  <link href="typebetter.css" rel="stylesheet" type="text/css">
+
+  <style>
+    /* vox model */
+    * {
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+
+    body {
+      padding: 100px;
+    }
+
+    #entry-title {
+      font-size: 3em;
+      outline: 0;
+      padding: 10px;
+      width: 100%;
+    }
+
+    #entry-title:focus {
+      border: 1px solid #fff200;
+    }
+  </style>
 </head>
 <body>
+
   <input id="entry-title" name="headline" type="text">
-  <script src="../dist/typebetter.js"></script>
+
+  <script src="../src/typebetter.js"></script>
   <script>
-  (function() {
-    TypeBetter.init( document.getElementById('entry-title') );
-  })();
+    (function() {
+      TypeBetter.init( document.getElementById('entry-title') );
+    })();
   </script>
+
 </body>
 </html>
