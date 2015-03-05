@@ -15,5 +15,11 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/yurivictor/typebetter.git"
+  },
+  "scripts": {
+    "build": "./scripts/build.sh"
+  },
+  "devDependencies": {
+    "uglify-js": "^2.4.16"
   }
 }
