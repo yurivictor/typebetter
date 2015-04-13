@@ -3,6 +3,8 @@ var TypeBetter = TypeBetter || {};
 TypeBetter = {
 
   input: '',
+  newValue: '',
+  deletions: [],
 
   init: function(input) {
     // Set input field
@@ -12,6 +14,7 @@ TypeBetter = {
   },
 
   bindUIActions: function() {
+    // Check every input
     if (this.input.addEventListener) {
       var actions = ['propertychange', 'change', 'input', 'paste'];
 
@@ -19,14 +22,48 @@ TypeBetter = {
         this.input.addEventListener(actions[i], this.handleQuotes, false);
       }
     }
+    // Check for deletions
+    this.input.onkeydown = function(event) {
+      var key = event.keyCode || event.charCode;
+      if ( key == 8 || key == 46 ) {
+        TypeBetter.handleDeletions();
+      }
+    };
+  },
+
+  handleDeletions: function() {
+    var deletedSpot = TypeBetter.input.selectionStart - 1,
+        deletedChar = TypeBetter.newValue[deletedSpot];
+    switch (deletedChar) {
+      case '\u201c':
+      case '\u201d':
+      case '\u2018':
+      case '\u2019':
+      case '\u2032':
+      case '\u2033':
+      case '\u2034':
+        if ( TypeBetter.deletions.indexOf(deletedSpot) <= -1 ) {
+          TypeBetter.deletions.push(deletedSpot);
+        }
+        return true;
+        break;
+      default:
+        return false;
+    }
   },
 
   handleQuotes: function() {
     // get current cursor position
     var start = this.selectionStart,
         end   = this.selectionEnd;
+    // Bail if this is a deleted spot
+    console.log( TypeBetter.deletions );
+    console.log( start );
+    if ( TypeBetter.deletions.indexOf(start - 1) > -1 ) {
+      return false;
+    }
     // Replaces input field type with better type
-    var newValue = TypeBetter.input.value
+    TypeBetter.newValue = TypeBetter.input.value
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
       // ending "
@@ -60,7 +97,7 @@ TypeBetter = {
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
     // Replace headline
-    TypeBetter.input.value = newValue;
+    TypeBetter.input.value = TypeBetter.newValue;
     // Restore cursor position
     this.setSelectionRange(start, end);
   }
