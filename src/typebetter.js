@@ -4,7 +4,7 @@ TypeBetter = {
 
   input: '',
 
-  init: function( input ) {
+  init: function(input) {
     // Set input field
     this.input = input;
     // Add events
@@ -26,7 +26,7 @@ TypeBetter = {
     var start = this.selectionStart,
         end   = this.selectionEnd;
     // Replaces input field type with better type
-    var new_value = TypeBetter.input.value
+    var newValue = TypeBetter.input.value
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
       // ending "
@@ -60,7 +60,7 @@ TypeBetter = {
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
     // Replace headline
-    TypeBetter.input.value = new_value;
+    TypeBetter.input.value = newValue;
     // Restore cursor position
     this.setSelectionRange(start, end);
   }
