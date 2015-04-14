@@ -58,10 +58,6 @@ TypeBetter = {
     var start     = this.selectionStart,
         end       = this.selectionEnd,
         tempValue = TypeBetter.input.value;
-    // // Bail if this is a deleted spot
-    // if (TypeBetter.deletions.indexOf(start - 1) > -1) {
-    //   return false;
-    // }
     // Create array of deleted characters
     if (TypeBetter.deletions.length > 0) {
       // Loop through position of deleted characters
@@ -107,13 +103,13 @@ TypeBetter = {
       .replace(/\u2013\u2013|--/g, ' \u2014 ')
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
-    // Readd deleted characters
     if (TypeBetter.deletions.length > 0) {
       // Update deleted character positions
 
       // Loop through deleted characters
       for (var key in TypeBetter.deletedChars) {
-        var deletions = TypeBetter.deletedChars[key]
+        var deletions = TypeBetter.deletedChars[key];
+        // Readd deleted characters
         TypeBetter.newValue = [TypeBetter.newValue.slice(0, deletions.tempPosition), deletions.tempChar, TypeBetter.newValue.slice(deletions.tempPosition)].join('');
       }
     }
