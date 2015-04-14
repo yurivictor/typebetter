@@ -110,11 +110,11 @@ TypeBetter = {
     // Readd deleted characters
     if (TypeBetter.deletions.length > 0) {
       // Update deleted character positions
-      
+
       // Loop through deleted characters
       for (var key in TypeBetter.deletedChars) {
         var deletions = TypeBetter.deletedChars[key]
-        TypeBetter.newValue = [tempValue.slice(0, deletions.tempPosition), deletions.tempChar, tempValue.slice(deletions.tempPosition)].join('');
+        TypeBetter.newValue = [TypeBetter.newValue.slice(0, deletions.tempPosition), deletions.tempChar, TypeBetter.newValue.slice(deletions.tempPosition)].join('');
       }
     }
     // Replace headline
