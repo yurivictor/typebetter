@@ -5,6 +5,7 @@ TypeBetter = {
   input: '',
   newValue: '',
   deletions: [],
+  deletedChars: {},
 
   init: function(input) {
     // Set input field
@@ -42,7 +43,7 @@ TypeBetter = {
       case '\u2032':
       case '\u2033':
       case '\u2034':
-        if ( TypeBetter.deletions.indexOf(deletedSpot) <= -1 ) {
+        if (TypeBetter.deletions.indexOf(deletedSpot) <= -1) {
           TypeBetter.deletions.push(deletedSpot);
         }
         return true;
@@ -54,16 +55,26 @@ TypeBetter = {
 
   handleQuotes: function() {
     // get current cursor position
-    var start = this.selectionStart,
-        end   = this.selectionEnd;
-    // Bail if this is a deleted spot
-    console.log( TypeBetter.deletions );
-    console.log( start );
-    if ( TypeBetter.deletions.indexOf(start - 1) > -1 ) {
-      return false;
+    var start     = this.selectionStart,
+        end       = this.selectionEnd,
+        tempValue = TypeBetter.input.value;
+    // // Bail if this is a deleted spot
+    // if (TypeBetter.deletions.indexOf(start - 1) > -1) {
+    //   return false;
+    // }
+    // Create array of deleted characters
+    if (TypeBetter.deletions.length > 0) {
+      // Loop through position of deleted characters
+      for (i = 0; i < TypeBetter.deletions.length; i++) {
+        var tempPosition = TypeBetter.deletions[i];
+        // Add chars to array
+        TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
+        // Remove characters from input string
+        tempValue = tempValue.substring(0, tempPosition) + tempValue.substring(tempPosition + 1, tempValue.length);
+      }
     }
     // Replaces input field type with better type
-    TypeBetter.newValue = TypeBetter.input.value
+    TypeBetter.newValue = tempValue
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
       // ending "
@@ -96,6 +107,16 @@ TypeBetter = {
       .replace(/\u2013\u2013|--/g, ' \u2014 ')
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
+    // Readd deleted characters
+    if (TypeBetter.deletions.length > 0) {
+      // Update deleted character positions
+      
+      // Loop through deleted characters
+      for (var key in TypeBetter.deletedChars) {
+        var deletions = TypeBetter.deletedChars[key]
+        TypeBetter.newValue = [tempValue.slice(0, deletions.tempPosition), deletions.tempChar, tempValue.slice(deletions.tempPosition)].join('');
+      }
+    }
     // Replace headline
     TypeBetter.input.value = TypeBetter.newValue;
     // Restore cursor position
