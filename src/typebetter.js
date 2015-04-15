@@ -36,6 +36,7 @@ TypeBetter = {
     var deletedSpot = TypeBetter.input.selectionStart - 1,
         deletedChar = TypeBetter.newValue[deletedSpot];
     switch (deletedChar) {
+      // Add deleted character to array if it's a smart quote
       case '\u201c':
       case '\u201d':
       case '\u2018':
@@ -48,7 +49,12 @@ TypeBetter = {
         }
         return true;
         break;
+      // Resets spot if it's anything other than a smart quote
       default:
+        var index = TypeBetter.deletions.indexOf(deletedSpot);
+        if (index !== -1) {
+          TypeBetter.deletions.splice(index, 1);
+        }
         return false;
     }
   },
