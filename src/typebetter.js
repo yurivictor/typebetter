@@ -68,20 +68,41 @@ TypeBetter = {
     if (TypeBetter.deletions.length > 0) {
       // Loop through position of deleted characters
       for (i = 0; i < TypeBetter.deletions.length; i++) {
-        var tempPosition = TypeBetter.deletions[i];
+        var tempPosition = TypeBetter.deletions[i],
+            smartChar    = false;
         // Move deleted character spot, if necessary
-        if (start < tempPosition) {
+        if (start = tempPosition ) {
+          // NEED TO HANDLE WHAT HAPPENS WHEN SOMEONE IS JUST DELETING
+          // AND NOT OVERRIDING A SMART QUOTE
+          //
+          // switch (tempValue[tempPosition]) {
+          //   // Add deleted character to array if it's a smart quote
+          //   case '"':
+          //   case '\'':
+          //     // do nothing
+          //     break;
+          //   // Resets spot if it's anything other than a smart quote
+          //   default:
+          //     var index = TypeBetter.deletions.indexOf(tempValue[tempPosition]);
+          //     if (index !== -1) {
+          //       TypeBetter.deletions.splice(index, 1);
+          //     }
+          //     smartChar = true;
+          // }
+        } else if (start < tempPosition) {
           // If this happens before our deletion
           // Add one to the position
           tempPosition = tempPosition + 1;
         }
-        // Add chars to array
-        TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
-        // Update main deletions array
-        var index = TypeBetter.deletions.indexOf(TypeBetter.deletions[i]);
-        TypeBetter.deletions[index] = tempPosition;
-        // Remove characters from input string
-        tempValue = tempValue.substring(0, tempPosition) + tempValue.substring(tempPosition + 1, tempValue.length);
+        if (smartChar == false) {
+          // Add chars to array
+          TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
+          // Update main deletions array
+          var index = TypeBetter.deletions.indexOf(TypeBetter.deletions[i]);
+          TypeBetter.deletions[index] = tempPosition;
+          // Remove characters from input string
+          tempValue = tempValue.substring(0, tempPosition) + tempValue.substring(tempPosition + 1, tempValue.length);
+        }
       }
     }
     // Replaces input field type with better type
