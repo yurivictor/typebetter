@@ -63,6 +63,12 @@ TypeBetter = {
       // Loop through position of deleted characters
       for (i = 0; i < TypeBetter.deletions.length; i++) {
         var tempPosition = TypeBetter.deletions[i];
+        // Move deleted character spot, if necessary
+        if (start < tempPosition) {
+          // If this happens before our deletion
+          // Add one to the position
+          tempPosition = tempPosition++;
+        }
         // Add chars to array
         TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
         // Remove characters from input string
@@ -104,10 +110,9 @@ TypeBetter = {
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
     if (TypeBetter.deletions.length > 0) {
-      // Update deleted character positions
-
       // Loop through deleted characters
       for (var key in TypeBetter.deletedChars) {
+        // Set this as a local var to make it easier to work with
         var deletions = TypeBetter.deletedChars[key];
         // Readd deleted characters
         TypeBetter.newValue = [TypeBetter.newValue.slice(0, deletions.tempPosition), deletions.tempChar, TypeBetter.newValue.slice(deletions.tempPosition)].join('');
