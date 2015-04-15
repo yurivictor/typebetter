@@ -73,10 +73,13 @@ TypeBetter = {
         if (start < tempPosition) {
           // If this happens before our deletion
           // Add one to the position
-          tempPosition = tempPosition++;
+          tempPosition = tempPosition + 1;
         }
         // Add chars to array
         TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
+        // Update main deletions array
+        var index = TypeBetter.deletions.indexOf(TypeBetter.deletions[i]);
+        TypeBetter.deletions[index] = tempPosition;
         // Remove characters from input string
         tempValue = tempValue.substring(0, tempPosition) + tempValue.substring(tempPosition + 1, tempValue.length);
       }
