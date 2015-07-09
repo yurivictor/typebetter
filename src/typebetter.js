@@ -4,8 +4,11 @@ TypeBetter = {
 
   input: '',
   newValue: '',
+  characters: [],
   deletions: [],
   deletedChars: {},
+  betterType: ['\u201c', '\u201d', '\u2018', '\u2019', '\u2032', '\u2033', '\u2034'],
+  dumbType: ['\"', "\'", '-', '.'],
 
   init: function(input) {
     // Set input field
@@ -20,92 +23,17 @@ TypeBetter = {
       var actions = ['propertychange', 'change', 'input', 'paste'];
 
       for (var i = 0, j = actions.length; i < j; i++) {
-        this.input.addEventListener(actions[i], this.handleQuotes, false);
+        this.input.addEventListener(actions[i], this.handleType, false);
       }
-    }
-    // Check for deletions
-    this.input.onkeydown = function(event) {
-      var key = event.keyCode || event.charCode;
-      if ( key == 8 || key == 46 ) {
-        TypeBetter.handleDeletions();
-      }
-    };
-  },
-
-  handleDeletions: function() {
-    var deletedSpot = TypeBetter.input.selectionStart - 1,
-        deletedChar = TypeBetter.newValue[deletedSpot];
-    switch (deletedChar) {
-      // Add deleted character to array if it's a smart quote
-      case '\u201c':
-      case '\u201d':
-      case '\u2018':
-      case '\u2019':
-      case '\u2032':
-      case '\u2033':
-      case '\u2034':
-        if (TypeBetter.deletions.indexOf(deletedSpot) <= -1) {
-          TypeBetter.deletions.push(deletedSpot);
-        }
-        return true;
-        break;
-      // Resets spot if it's anything other than a smart quote
-      default:
-        var index = TypeBetter.deletions.indexOf(deletedSpot);
-        if (index !== -1) {
-          TypeBetter.deletions.splice(index, 1);
-        }
-        return false;
     }
   },
 
-  handleQuotes: function() {
+  handleType: function() {
     // get current cursor position
     var start     = this.selectionStart,
         end       = this.selectionEnd,
         tempValue = TypeBetter.input.value;
-    // Create array of deleted characters
-    if (TypeBetter.deletions.length > 0) {
-      // Loop through position of deleted characters
-      for (i = 0; i < TypeBetter.deletions.length; i++) {
-        var tempPosition = TypeBetter.deletions[i],
-            smartChar    = false;
-        // Move deleted character spot, if necessary
-        if (start = tempPosition ) {
-          // NEED TO HANDLE WHAT HAPPENS WHEN SOMEONE IS JUST DELETING
-          // AND NOT OVERRIDING A SMART QUOTE
-          //
-          // switch (tempValue[tempPosition]) {
-          //   // Add deleted character to array if it's a smart quote
-          //   case '"':
-          //   case '\'':
-          //     // do nothing
-          //     break;
-          //   // Resets spot if it's anything other than a smart quote
-          //   default:
-          //     var index = TypeBetter.deletions.indexOf(tempValue[tempPosition]);
-          //     if (index !== -1) {
-          //       TypeBetter.deletions.splice(index, 1);
-          //     }
-          //     smartChar = true;
-          // }
-        } else if (start < tempPosition) {
-          // If this happens before our deletion
-          // Add one to the position
-          tempPosition = tempPosition + 1;
-        }
-        if (smartChar == false) {
-          // Add chars to array
-          TypeBetter.deletedChars[i] = {"tempPosition": tempPosition, "tempChar": tempValue[tempPosition]};
-          // Update main deletions array
-          var index = TypeBetter.deletions.indexOf(TypeBetter.deletions[i]);
-          TypeBetter.deletions[index] = tempPosition;
-          // Remove characters from input string
-          tempValue = tempValue.substring(0, tempPosition) + tempValue.substring(tempPosition + 1, tempValue.length);
-        }
-      }
-    }
-    // Replaces input field type with better type
+
     TypeBetter.newValue = tempValue
       // beginning "
       .replace(/(\W|^)"/g, '$1\u201c')
@@ -139,15 +67,7 @@ TypeBetter = {
       .replace(/\u2013\u2013|--/g, ' \u2014 ')
       // rock 'n' roll
       .replace(/(\s)(\u2018|')(n)(\u2019|')(\s)/gi, ' ’n’ ');
-    if (TypeBetter.deletions.length > 0) {
-      // Loop through deleted characters
-      for (var key in TypeBetter.deletedChars) {
-        // Set this as a local var to make it easier to work with
-        var deletions = TypeBetter.deletedChars[key];
-        // Readd deleted characters
-        TypeBetter.newValue = [TypeBetter.newValue.slice(0, deletions.tempPosition), deletions.tempChar, TypeBetter.newValue.slice(deletions.tempPosition)].join('');
-      }
-    }
+
     // Replace headline
     TypeBetter.input.value = TypeBetter.newValue;
     // Restore cursor position
