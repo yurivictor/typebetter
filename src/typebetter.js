@@ -10,6 +10,7 @@ TypeBetter = {
   betterType: ['\u201c', '\u201d', '\u2018', '\u2019', '\u2032', '\u2033', '\u2034'],
   dumbType: ['\"', "\'", '-', '.'],
 
+
   init: function(input) {
     // Set input field
     this.input = input;
@@ -17,7 +18,13 @@ TypeBetter = {
     this.bindUIActions();
   },
 
+  settings: {
+    on: true || localStorage.getItem('typebetter-on')
+  },
+
   bindUIActions: function() {
+    // Check for on off
+    this.input.onkeyup = function(e) { TypeBetter.toggleType(e) };
     // Check every input
     if (this.input.addEventListener) {
       var actions = ['propertychange', 'change', 'input', 'paste'];
@@ -28,7 +35,21 @@ TypeBetter = {
     }
   },
 
+  toggleType: function(e) {
+    // If control and single quote are pressed together
+    // toggle typebetter on and off
+    if (e.which == '222' && e.ctrlKey == true) {
+      TypeBetter.settings.on = ! TypeBetter.settings.on;
+      // Save this update to localStorage
+      localStorage.setItem("typebetter-on", TypeBetter.settings.on);
+    }
+  },
+
   handleType: function() {
+    // Don't do anything if typebetter is turned off
+    if ( ! TypeBetter.settings.on ) {
+      return false;
+    }
     // get current cursor position
     var start     = this.selectionStart,
         end       = this.selectionEnd,
